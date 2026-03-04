@@ -4,7 +4,7 @@ int main(){
 
     //declaração variaveis
     char peça, voltarJogo; //variaveis para a escolha da peça a ser movimentada e para voltar ao Jogo
-    int escolhaMenu, i = 1, j = 1, k; //variaveis para a escolha do menu e dos 3 loops
+    int escolhaMenu, i = 1, j = 1, k, l1 = 1, l2; //variaveis para a escolha do menu e dos loops das peças
 
     //introdução
     printf("\t*** JOGO DO XADREZ ***\n");
@@ -16,7 +16,8 @@ int main(){
         case 1: printf("\tREGRAS ***\n"); //regras do jogo
                 printf("Torre move em linea reta, horizontal e vertical\n");
                 printf("Bispo move em diagonal\n");
-                printf("Rainha move em todas as direções\n\n"); 
+                printf("Rainha move em todas as direções\n");
+                printf("Cavalo move em L: duas casas en linea reta e uma casa perpendicular\n\n"); 
                 //possibilidade de jogar de novo ou de sair
                 printf("Quer jogar de novo?: S/N\n"); scanf(" %c", &voltarJogo);
                 if(voltarJogo == 'n' || voltarJogo == 'N'){
@@ -27,7 +28,7 @@ int main(){
                     printf("Escolha invalida\n");
                 }
                 break;
-        case 2: printf("Escolha a peça que quer utilizar: \nT - Torre\nB - Bispo\nR - Rainha\n"); scanf(" %c", &peça); //peça para movimentar
+        case 2: printf("Escolha a peça que quer utilizar: \nT - Torre\nB - Bispo\nR - Rainha\nC - Cavalo\n"); scanf(" %c", &peça); printf("\n");//peça para movimentar
                 switch(peça){
                     //Torre
                     case 't':
@@ -36,7 +37,7 @@ int main(){
                     do{ 
                         printf("1 casa para direita\n");
                         i++;
-                    } while(i <= 5); printf("Total: %d casas\n\n", i - 1);
+                    } while(i <= 5); printf("Total: %d casas para direita\n\n", i - 1);
                     break;
                     //Bispo
                     case 'b':
@@ -44,7 +45,7 @@ int main(){
                     //estrutura while para o Bispo
                     while(j <= 5){ 
                         printf("1 casa para cima e á direita\n"); j++;
-                    } printf("Total: %d casas\n\n", j - 1); 
+                    } printf("Total: %d casas para cima e direita\n\n", j - 1); 
                     break;
                     //Rainha
                     case 'r':
@@ -52,18 +53,25 @@ int main(){
                     //estrutura for para a Rainha
                     for(k = 0; k <= 8; k++){
                         printf("1 casa para esquerda\n");
-                    } printf("Total: %d casas\n\n", k--);
+                    } printf("Total: %d casas para esquerda\n\n", k--);
+                    break;
+                    //Cavalo
+                    case 'c':
+                    case 'C': printf("Você escolheu: Cavalo\n\n"); printf("\t****Movimentos do Cavalo:\n");
+                    //estrutura aninhada para o Cavalo (while e for)
+                    while(l1 < 2){
+                        for(l2 = 0; l2 < 2; l2++){
+                            printf("1 casa para baixo\n");
+                        } printf("1 casa para esquerda\n");
+                        l1++;
+                    } printf("Total %d casas para baixo e %d casa para esquerda\n\n", l2--, l1 - 1);
                     break;
                     default: printf("Escolha invalida\n");
-
                 } break;
         case 3: printf("Obrigado por ter jogado!\nAté á proxima!\nSaindo...\n"); break;
         default: printf("Por favor escolha um valor entre 1 e 3\n");
         } 
     } while(escolhaMenu != 3);
     
-
-
-
     return 0;
 }
