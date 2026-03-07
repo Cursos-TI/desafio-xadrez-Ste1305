@@ -1,10 +1,22 @@
 #include <stdio.h>
 
+// prototipo da função para os movimentos da Torre 
+void torre(int n);
+
+//prototipo da função para os movimentos da Rainha 
+void rainha(int n);
+
+//prototipo da função para os movimentos do Cavalo
+void cavalo();
+
+//prototipo da função para os movimentos do Bispo 
+void bispo(int n);
+
 int main(){
 
     //declaração variaveis
     char peça, voltarJogo; //variaveis para a escolha da peça a ser movimentada e para voltar ao Jogo
-    int escolhaMenu, i = 1, j = 1, k, l1 = 1, l2; //variaveis para a escolha do menu e dos loops das peças
+    int escolhaMenu; //variaveis para a escolha do menu e dos loops das peças
 
     //introdução
     printf("\t*** JOGO DO XADREZ ***\n");
@@ -33,38 +45,26 @@ int main(){
                     //Torre
                     case 't':
                     case 'T': printf("Você escolheu: Torre\n\n"); printf("\t****Movimentos da Torre:\n"); 
-                    //estrutura do while para a Torre
-                    do{ 
-                        printf("1 casa para direita\n");
-                        i++;
-                    } while(i <= 5); printf("Total: %d casas para direita\n\n", i - 1);
+                    //função da Torre
+                    torre(5);
                     break;
                     //Bispo
                     case 'b':
                     case 'B': printf("Você escolheu: Bispo\n\n"); printf("\t****Movimentos do Bispo:\n");
-                    //estrutura while para o Bispo
-                    while(j <= 5){ 
-                        printf("1 casa para cima e á direita\n"); j++;
-                    } printf("Total: %d casas para cima e direita\n\n", j - 1); 
+                    //função para o Bispo
+                    bispo(5);
                     break;
                     //Rainha
                     case 'r':
                     case 'R': printf("Você escolheu: Rainha\n\n"); printf("\t****Movimentos da Rainha:\n");
-                    //estrutura for para a Rainha
-                    for(k = 0; k <= 8; k++){
-                        printf("1 casa para esquerda\n");
-                    } printf("Total: %d casas para esquerda\n\n", k--);
+                    //função para a Rainha
+                    rainha(8);
                     break;
                     //Cavalo
                     case 'c':
                     case 'C': printf("Você escolheu: Cavalo\n\n"); printf("\t****Movimentos do Cavalo:\n");
-                    //estrutura aninhada para o Cavalo (while e for)
-                    while(l1 < 2){
-                        for(l2 = 0; l2 < 2; l2++){
-                            printf("1 casa para baixo\n");
-                        } printf("1 casa para esquerda\n");
-                        l1++;
-                    } printf("Total %d casas para baixo e %d casa para esquerda\n\n", l2--, l1 - 1);
+                    //função para o Cavalo
+                    cavalo();
                     break;
                     default: printf("Escolha invalida\n");
                 } break;
@@ -75,3 +75,38 @@ int main(){
     
     return 0;
 }
+
+//função para os movimentos da Torre com recursividade
+void torre(int n){
+    if(n <= 0) return; //base case da recursividade
+    for(int i = 1; i < 2; i++){
+        printf("Direita\n");
+    } torre(n -1); //recursividade
+}
+
+//função para os movimentos da Rainha com recursividade
+void rainha(int n){
+    if(n <= 0) return;
+    for(int i = 1; i < 2; i++){
+        printf("Esquerda\n");
+    } rainha(n - 1); //recursividade
+}
+
+//função para os movimentos do Cavalo com loop complexo de duas variaveis e continue
+void cavalo(){
+    int i, j;
+    for(i = 1, j = 0; j < 2; i++, j++){
+        printf("Acima\n"); if(j == 0) continue; printf("Direita\n");
+    }
+}
+
+//função para os movimentos do Bispo com recursividade e loops aninhados
+void bispo(int n){
+    if(n <= 0) return; { 
+        for(int i = 1; i < 2; i++){ //loop externo para cima
+            for(int j = 1; j == i; j++){ //loop interno para esquerda
+                printf("Direita\n");
+            } printf("Acima\n");
+        }
+    } bispo(n - 1);// recursividade
+} 
